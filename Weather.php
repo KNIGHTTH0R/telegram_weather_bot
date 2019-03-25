@@ -4,7 +4,7 @@ use GuzzleHttp\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 class Weather{
 
-  protected $token = '49301bf5017ce6142ac02c8b6fedcaf8'; //Киев
+  protected $token = '**token**'; //Киев
   // http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&lang={lang}
 
   public function getWeather($city_name){

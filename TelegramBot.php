@@ -6,7 +6,7 @@ class TelegramBot{
 
   protected $update_id;
 
-  protected $token = '819783012:AAGdh18qGQNSpSe0LWyqbpx2WGpLqr1gLhU';
+  protected $token = '**token**';
 
   protected function query($method, $params = []){
 
