@@ -6,15 +6,19 @@ class TelegramBot{
 
   protected $update_id;
 
-  protected $token = '***token***';
+  protected $token = '819783012:AAGdh18qGQNSpSe0LWyqbpx2WGpLqr1gLhU';
 
   protected function query($method, $params = []){
-    
-    $url = 'https://api.telegram.org/bot' . $this->token . '/' . $method;
 
-    if(!empty($params))
+    $url = 'https://api.telegram.org/bot';
+
+    $url .= $this->token . '/' . $method;
+
+    if(!empty($params)){
 
       $url .= '?' . http_build_query($params);
+
+    }
 
     $client = new Client(['base_uri' => $url]);
 
