@@ -1,7 +1,7 @@
 <?php
 
 use GuzzleHttp\Client;
-
+use Guzzle\Http\Exception\ClientException;
 class TelegramBot{
 
   protected $update_id;
@@ -10,28 +10,46 @@ class TelegramBot{
 
   protected function query($method, $params = []){
 
-    $url = 'https://api.telegram.org/bot';
+    try{
 
-    $url .= $this->token . '/' . $method;
+      $url = 'https://api.telegram.org/bot';
 
-    if(!empty($params)){
+      $url .= $this->token . '/' . $method;
 
-      $url .= '?' . http_build_query($params);
+      if(!empty($params)){
+
+        $url .= '?' . http_build_query($params);
+
+      }
+
+      $client = new Client(['base_uri' => $url]);
+
+      $result = $client->request('GET');
+
+      return json_decode($result->getBody());
 
     }
 
-    $client = new Client(['base_uri' => $url]);
+    catch(\Exception $e){
 
-    $result = $client->request('GET');
+      return 0;
 
-    return json_decode($result->getBody());
+    }
+
   }
 
   public function sendMessage($chat_id, $text){
 
     $response = $this->query('sendMessage', ['chat_id' => $chat_id, 'text' => $text]);
 
+    if(is_int($response) && $response == 0)
+
+      return 0;
+
+    else
+
     return $response->result;
+
   }
 
   public function getUpdates(){
@@ -43,10 +61,17 @@ class TelegramBot{
       $this->update_id = $response->result[count($response->result)-1]->update_id;
 
       print_r($response->result);
-      
+
     }
 
+    if(is_int($response) && $response == 0)
+
+      return 0;
+
+    else
+
     return $response->result;
+
   }
 
 }
