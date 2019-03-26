@@ -6,7 +6,7 @@ class TelegramBot{
 
   protected $update_id;
 
-  protected $token = '**token**';
+  protected $token = '819783012:AAGEhpb5MSEqOBTYWr7tt7_F7cJ_ZKbJ_Qc';
 
   protected function query($method, $params = []){
 
@@ -38,9 +38,13 @@ class TelegramBot{
 
     $response = $this->query('getUpdates', ['offset' => $this->update_id+1]);
 
-    if(!empty($response->result))
+    if(!empty($response->result)){
 
       $this->update_id = $response->result[count($response->result)-1]->update_id;
+
+      print_r($response->result);
+      
+    }
 
     return $response->result;
   }
