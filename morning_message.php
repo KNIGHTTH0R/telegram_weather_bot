@@ -9,7 +9,7 @@ $bot = new TelegramBot();
 $weather = new Weather();
 // $i = true;
 while(true){
-  if(date('H:i') == '21:40' || date('H:i') == '22:40'){
+  if(date('H:i') == '08:00'){
 
     echo 'Morning message ';
 
