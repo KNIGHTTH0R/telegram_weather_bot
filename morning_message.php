@@ -32,7 +32,7 @@ while(true){
       else $msg .= ', ' . $value;
     }
 
-    $msg .= ".\nТемпература составляет " . round($freshData->main->temp - 273, 0, PHP_ROUND_HALF_UP) . " ℃.\nНе простуди жопу!";
+    $msg .= ".\nТемпература составляет " . round($freshData->main->temp - 273, 0, PHP_ROUND_HALF_UP) . " ℃.\nХорошего дня!";
 
     $bot->sendMessage('-250143773', $msg);
 
