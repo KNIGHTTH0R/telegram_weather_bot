@@ -11,11 +11,11 @@ while(true){
 
   $time_begin = time();
 
-  sleep(2);
+  sleep(1);
 
   $updates = $bot->getUpdates();
 
-  if($updates == 0){echo 'No connection';}
+  if($updates == 0) echo 'No connection ';
 
   else{
 
@@ -52,13 +52,15 @@ while(true){
 
           $msg .= ".\nТемпература составляет " . round($freshData->main->temp - 273, 0, PHP_ROUND_HALF_UP) . " ℃.\nХорошего дня!";
 
+          while(is_int($status = $bot->sendMessage($update->message->chat->id, $msg)) && $status == 0){
+
+            echo 'No connection ';
+            
+            sleep(3);
+
+          }
+
         }
-
-      while(is_int($status = $bot->sendMessage($update->message->chat->id, $msg)) && $status == 0){
-
-        sleep(3);
-
-      }
 
       }
 
@@ -66,7 +68,7 @@ while(true){
 
   }
 
-echo (time() - $time_begin) . '   ';
+  echo (time() - $time_begin) . ' ';
 
 }
 
